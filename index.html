@@ -13,12 +13,23 @@
     />
   </head>
   <body>
-    <div class="container">
-      <img src="" alt="" id="music-image" style="width: 300px;"/>
+    <div class="container" >
+      <img src="" alt="" id="music-image" style="width: 300px; height: 200px;"/>
       <audio id="audio-play" src=""></audio>
       <div id="music-details">
         <p class="title"></p>
         <p class="singer"></p>
+      </div>
+      <div id="progress">
+        <input type="range" name="" id="progress-bar">
+        <div class="times">
+          <span id="current-time">
+            0:00
+          </span>
+          <span id="duration">
+            0:00
+          </span>
+        </div>
       </div>
       <div id="controls">
         <i id="prev" class="fa-solid fa-backward-step"></i>
