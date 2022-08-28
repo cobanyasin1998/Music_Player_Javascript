@@ -9,6 +9,11 @@ const next = document.querySelector("#controls #next");
 
 const audio = document.querySelector("#audio-play");
 
+const duration = document.querySelector("#duration");
+const currentTime = document.querySelector("#current-time");
+
+const progressBar = document.querySelector("#progress-bar");
+
 const player = new MusicPlayer(musicList);
 
 window.addEventListener("load", () => {
@@ -47,17 +52,37 @@ function playMusic() {
 function prevMusic() {
   debugger;
   player.previous();
-
   let music = player.getMusic();
   displayMusic(music);
-
   playMusic();
 }
 function nextMusic() {
   player.next();
-
   let music = player.getMusic();
   displayMusic(music);
-
   playMusic();
 }
+
+audio.addEventListener("loadedmetadata", () => {
+  duration.textContent = calculateTime(audio.duration);
+
+  progressBar.max = Math.floor(audio.duration);
+});
+
+const calculateTime = (seconds) => {
+  const minutes = Math.floor(seconds / 60);
+  const second = Math.floor(seconds % 60);
+  const guncellenen_saniye = second < 10 ? `0${second}` : `${second}`;
+  const result = `${minutes}:${guncellenen_saniye}`;
+  return result;
+};
+
+audio.addEventListener("timeupdate", () => {
+  progressBar.value = Math.floor(audio.currentTime);
+  currentTime.textContent = calculateTime(progressBar.value);
+});
+
+progressBar.addEventListener("input", () => {
+  currentTime.textContent = calculateTime(progressBar.value);
+  audio.currentTime = progressBar.value;
+});
