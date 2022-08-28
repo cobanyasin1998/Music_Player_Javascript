@@ -1,4 +1,4 @@
-const container = document.querySelector(".container");
+const container = document.querySelector(".myContainer");
 const image = document.querySelector("#music-image");
 const title = document.querySelector("#music-details .title");
 const singer = document.querySelector("#music-details .singer");
@@ -41,15 +41,14 @@ next.addEventListener("click", () => {
 function pauseMusic() {
   audio.pause();
   container.classList.remove("playing");
-  play.classList = "fa-solid fa-play";
+  play.querySelector("i").classList = "fa-solid fa-play";
 }
 function playMusic() {
   audio.play();
   container.classList.add("playing");
-  play.classList = "fa-solid fa-pause";
+  play.querySelector("i").classList = "fa-solid fa-pause";
 }
 function prevMusic() {
-  debugger;
   player.previous();
   let music = player.getMusic();
   displayMusic(music);
@@ -90,18 +89,17 @@ let sesDurumu = "sesli";
 
 volumeBar.addEventListener("click", (e) => {
   const value = e.target.value;
-  audio.volume = value/100;
-  if(value == 0){
+  audio.volume = value / 100;
+  if (value == 0) {
     audio.muted = true;
     sesDurumu = "sessiz";
     volume.classList = "fa-solid fa-volume-xmark";
     volumeBar.value = 0;
-  }
-  else{
+  } else {
     audio.muted = false;
     sesDurumu = "sesli";
     volume.classList = "fa-solid fa-volume-high";
-    volumeBar.value = 100;
+    volumeBar.value = value;
   }
 });
 
